@@ -1,0 +1,7 @@
+applications:
+- name: kraken-broker
+  buildpack: binary_buildpack
+  command: ./run-kraken.sh
+  disk_quota: 1G
+  instances: 1
+  memory: 512M 

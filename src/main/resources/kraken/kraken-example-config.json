@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "port": 8081,
+  "name": "example",
+
+  "extra_config": {
+    "github_com/devopsfaith/krakend-gologging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
+    }
+  },
+  "max_idle_connections": 250,
+  "timeout": "3000ms",
+  "read_timeout": "0s",
+  "write_timeout": "0s",
+  "idle_timeout": "0s",
+  "read_header_timeout": "0s",
+  "cache_ttl": "300s",
+
+  "endpoints": [
+    {
+      "endpoint": "/github",
+      "method": "GET",
+      "timeout": 1000,
+      "cache_ttl": 3600,
+      "backend": [{
+        "method": "GET",
+        "host": [
+          "https://api.github.com"
+        ]
+
+      }]
+    }
+  ]
+}

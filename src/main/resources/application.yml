@@ -1,0 +1,81 @@
+
+info:
+  app:
+    name: "@project.artifactId@"
+    version: "@project.version@"
+management:
+  context-path: /actuator
+server:
+  port: 9797
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:6432/appbroker
+    username: appbroker
+    password: appbroker
+    driver-class-name: org.postgresql.Driver
+  main:
+    banner-mode: "off"
+  jpa:
+    generate-ddl: false
+    properties:
+      hibernate.id.new_generator_mappings: true
+    database: postgresql
+
+  cloud:
+    skipper:
+
+      server:
+        packageRepositories:
+          -
+            name: app-broker
+            url: http://localhost:8080/repository
+            description: App broker repository
+            repoOrder: 0
+          -
+            name: local
+            url: http://${spring.cloud.client.hostname}:7577
+            local: true
+            description: Default local database backed repository
+            repoOrder: 1
+        enable-local-platform: false
+        platform:
+          cloudfoundry:
+            accounts:
+              indigo:
+                connection:
+                  url: https://api.cf.indigo.springapps.io
+                  org: skipper
+                  space: experimental
+                  domain: apps.indigo.springapps.io
+                  username: admin
+                  password: mnU1NodeayC_Lww2xCuP65vKg8PWdknc
+                  skip-ssl-validation: true
+                deployment:
+                  use-spring-application-json: false
+  mustache:
+    check-template-location: false
+
+maven:
+  remoteRepositories:
+    springRepo:
+      url: https://repo.spring.io/libs-snapshot
+
+logging:
+  level:
+    org.springframework.beans: 'WARN'
+    org.springframework.context: 'WARN'
+    org.springframework.core.io: 'WARN'
+    org.springframework.data: 'WARN'
+    org.springframework.jmx: 'WARN'
+    org.springframework.web: 'WARN'
+    org.springframework.security: 'WARN'
+    org.springframework.integration: 'WARN'
+    org.springframework.boot: 'WARN'
+    org.springframework.boot.context.embedded.tomcat: 'INFO'
+    org.hibernate: 'WARN'
+    # The following INFO is to log the generated password when using basic security
+    org.springframework.boot.autoconfigure.security: 'INFO'
+    org.springframework.cloud.skipper: 'INFO'
+    org.springframework.statemachine: 'INFO'
+flyway:
+  locations: /db/migration/{vendor}

@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+		skipperVersion = '1.0.0.RELEASE'
+		reactorVersion = "3.0.7.RELEASE"
+		reactorNettyVersion = "3.0.7.RELEASE"
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/plugins-release" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: "propdeps-idea"
+
+group = 'me.ohughes'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.cloud:spring-cloud-skipper-server-core:${skipperVersion}")
+	compile("org.springframework.cloud:spring-cloud-skipper-platform-cloudfoundry:${skipperVersion}")
+	compile("io.projectreactor:reactor-core:${reactorVersion}")
+
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = "4.4.1"
+}

@@ -1,0 +1,10 @@
+apiVersion: appbroker.spring.io/v1
+kind: SkipperPackageMetadata
+origin: A sample repository to testing App Broker
+name: kraken-broker
+version: 0.0.1
+packageSourceUrl: https://github.com/ojhughes/kraken-broker
+packageHomeUrl: https://github.com/ojhughes/kraken-broker
+tags: web, demo, maven, helloworld
+maintainer: https://github.com/ojhughes
+description: The app has a /status endpoint that will say if it is in blue or green mode

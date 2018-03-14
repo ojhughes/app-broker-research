@@ -1,0 +1,16 @@
+apiVersion: appbroker.spring.io/v1
+kind: SpringCloudDeployerApplication
+metadata:
+  name: greenapp
+  type: demo
+spec:
+  resource: http://localhost:8080/artifacts/bluegreen/green-app
+  version: {{version}}
+  applicationProperties:
+    {{#spec.applicationProperties.entrySet}}
+    {{key}}: {{value}}
+    {{/spec.applicationProperties.entrySet}}
+  deploymentProperties:
+    {{#spec.deploymentProperties.entrySet}}
+    {{key}}: {{value}}
+    {{/spec.deploymentProperties.entrySet}}
